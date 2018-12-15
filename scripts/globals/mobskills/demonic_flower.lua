@@ -20,8 +20,13 @@ function onMobWeaponSkill(target, mob, skill)
     -- The dmg amounts and duration are guesstimated based on wiki info.
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 90))
 
+<<<<<<< HEAD
     mob:delHP(dmg1)
     target:delHP(dmg2)
+=======
+    mob:takeDamage(dmg1)
+    target:takeDamage(dmg2, mob)
+>>>>>>> Finish replacing delHP with takeDamage
 
     return dmg2
 end
