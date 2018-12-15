@@ -352,8 +352,12 @@ public:
     int32 setHP(lua_State*);                // Set hp of Entity to value
     int32 restoreHP(lua_State*);            // Modify hp of Entity, but check if alive first
 <<<<<<< HEAD
+<<<<<<< HEAD
     int32 delHP(lua_State*);                // Subtract hp of Entity
 =======
+=======
+    int32 delHP(lua_State*);                // Subtract hp of Entity
+>>>>>>> Adding delHP back into LuaBaseEntity
     int32 takeDamage(lua_State*);           // Takes damage from the provided attacker
 >>>>>>> Finish replacing delHP with takeDamage
     int32 hideHP(lua_State* L);
