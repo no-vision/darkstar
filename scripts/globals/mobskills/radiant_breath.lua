@@ -23,7 +23,12 @@ function onMobWeaponSkill(target, mob, skill)
 
     local dmgmod = MobBreathMove(mob, target, 0.2, 0.75, dsp.magic.ele.LIGHT, 700)
 
+<<<<<<< HEAD
     local dmg = MobFinalAdjustments(dmgmod,mob,skill,target,MOBSKILL_BREATH,MOBPARAM_LIGHT,MOBPARAM_WIPE_SHADOWS)
     target:delHP(dmg)
+=======
+    local dmg = MobFinalAdjustments(dmgmod,mob,skill,target,dsp.attackType.BREATH,dsp.damageType.LIGHT,MOBPARAM_IGNORE_SHADOWS)
+    target:takeDamage(dmg, mob, dsp.attackType.BREATH, dsp.damageType.LIGHT)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     return dmg
 end

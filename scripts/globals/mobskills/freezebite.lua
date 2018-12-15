@@ -32,7 +32,11 @@ function onMobWeaponSkill(target, mob, skill)
     params.atkmulti = 1
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(mob, target, 0, 0, true, nil, nil, params)
     
+<<<<<<< HEAD
     target:delHP(damage)
+=======
+    target:takeDamage(damage, mob, dsp.attackType.MAGICAL, dsp.damageType.ICE)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     return damage
 end
     

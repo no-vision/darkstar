@@ -49,7 +49,12 @@ function onPetAbility(target, automaton, skill, master, action)
 
     damage = damage * (pdif / 1000)
 
+<<<<<<< HEAD
     target:delHP(damage)
+=======
+    damage = utils.stoneskin(target, damage)
+    target:takeDamage(damage, automaton, dsp.attackType.PHYSICAL, dsp.damageType.BLUNT)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     target:updateEnmityFromDamage(automaton, damage)
     target:addEnmity(automaton, 450, 900)
 

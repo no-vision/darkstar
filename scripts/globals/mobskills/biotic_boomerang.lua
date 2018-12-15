@@ -20,12 +20,16 @@ function onMobWeaponSkill(target, mob, skill)
     local accmod = 1
     local dmgmod = 1
     local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,0,1,2,3)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,MOBSKILL_PHYSICAL,0,info.hitslanded)
+    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,dsp.attackType.PHYSICAL,dsp.damageType.SLASHING,info.hitslanded)
     local typeEffect = dsp.effect.PLAGUE
 
     MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 18, 3, 60)
 
+<<<<<<< HEAD
     target:delHP(dmg)
+=======
+    target:takeDamage(dmg, mob, dsp.attackType.PHYSICAL, dsp.damageType.SLASHING)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     return dmg
 
 end

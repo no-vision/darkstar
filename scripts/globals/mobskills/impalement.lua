@@ -24,9 +24,13 @@ function onMobWeaponSkill(target, mob, skill)
     -- remove all by 5%
     local stab = currentHP * .95
 
-    local dmg = MobFinalAdjustments(stab, mob, skill, target, MOBSKILL_PHYSICAL, MOBPARAM_PIERCE, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(stab, mob, skill, target, dsp.attackType.PHYSICAL, dsp.damageType.PIERCING, MOBPARAM_IGNORE_SHADOWS)
 
+<<<<<<< HEAD
     target:delHP(dmg)
+=======
+    target:takeDamage(dmg, mob, dsp.attackType.PHYSICAL, dsp.damageType.PIERCING)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
 
     mob:resetEnmity(target)
     return dmg

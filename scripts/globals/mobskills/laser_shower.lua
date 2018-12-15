@@ -28,10 +28,14 @@ function onMobWeaponSkill(target, mob, skill)
     dmgmod = dmgmod * dis
     dmgmod = utils.clamp(dmgmod, 50, 1600)
 
-    local dmg = MobFinalAdjustments(dmgmod,mob,skill,target,MOBSKILL_BREATH,MOBPARAM_LIGHT,MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(dmgmod,mob,skill,target,dsp.attackType.BREATH,dsp.damageType.LIGHT,MOBPARAM_IGNORE_SHADOWS)
 
     MobPhysicalStatusEffectMove(mob, target, skill, dsp.effect.DEFENSE_DOWN, 25, 0, 60)
 
+<<<<<<< HEAD
     target:delHP(dmg)
+=======
+    target:takeDamage(dmg, mob, dsp.attackType.BREATH, dsp.damageType.LIGHT)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     return dmg
 end

@@ -21,11 +21,15 @@ function onMobWeaponSkill(target, mob, skill)
     local accmod = 3
     local dmgmod = 4
     local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_DMG_VARIES,1,2,3)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,MOBSKILL_RANGED,MOBPARAM_PIERCE,MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,dsp.attackType.RANGED,dsp.damageType.PIERCING,MOBPARAM_IGNORE_SHADOWS)
 
     MobStatusEffectMove(mob, target, dsp.effect.BIND, 1, 0, 120)
     MobStatusEffectMove(mob, target, dsp.effect.AMNESIA, 1, 0, 120)
 
+<<<<<<< HEAD
     target:delHP(dmg)
+=======
+    target:takeDamage(dmg, mob, dsp.attackType.RANGED, dsp.damageType.PIERCING)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     return dmg
 end

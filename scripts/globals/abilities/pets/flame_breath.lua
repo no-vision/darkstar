@@ -31,7 +31,12 @@ function onUseAbility(pet, target, skill, action)
     dmgmod = (dmgmod * (1+gear))*deep
     pet:setTP(0)
 
+<<<<<<< HEAD
     local dmg = AbilityFinalAdjustments(dmgmod,pet,skill,target,MOBSKILL_MAGICAL,MOBPARAM_FIRE,MOBPARAM_IGNORE_SHADOWS)
     target:delHP(dmg)
+=======
+    local dmg = AbilityFinalAdjustments(dmgmod,pet,skill,target,dsp.attackType.BREATH,dsp.damageType.FIRE,MOBPARAM_IGNORE_SHADOWS)
+    target:takeDamage(dmg, pet, dsp.attackType.BREATH, dsp.damageType.FIRE)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     return dmg
 end

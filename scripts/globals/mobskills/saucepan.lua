@@ -16,13 +16,17 @@ function onMobWeaponSkill(target, mob, skill)
     local accmod = 1
     local dmgmod = 0.8
     local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,MOBSKILL_PHYSICAL,MOBPARAM_BLUNT,info.hitslanded)
+    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,dsp.attackType.PHYSICAL,dsp.damageType.BLUNT,info.hitslanded)
     if (target:hasStatusEffect(dsp.effect.FOOD)) then
         target:delStatusEffectSilent(dsp.effect.FOOD)
     elseif (target:hasStatusEffect(dsp.effect.FIELD_SUPPORT_FOOD)) then
         target:delStatusEffectSilent(dsp.effect.FIELD_SUPPORT_FOOD)
     end
     target:addStatusEffectEx(dsp.effect.FIELD_SUPPORT_FOOD,dsp.effect.FOOD, 255, 0, 1800)
+<<<<<<< HEAD
     target:delHP(dmg)
+=======
+    target:takeDamage(dmg, mob, dsp.attackType.PHYSICAL, dsp.damageType.BLUNT)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     return dmg
 end

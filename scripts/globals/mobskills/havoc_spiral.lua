@@ -25,10 +25,14 @@ function onMobWeaponSkill(target, mob, skill)
     local accmod = 1
     local dmgmod = 3
     local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,MOBSKILL_PHYSICAL,MOBPARAM_SLASH,MOBPARAM_2_SHADOW)
+    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,dsp.attackType.PHYSICAL,dsp.damageType.SLASHING,MOBPARAM_2_SHADOW)
 
    -- Witnessed 280 to a melee, 400 to a BRD, and 500 to a wyvern, so...
+<<<<<<< HEAD
    target:delHP(dmg)
+=======
+   target:takeDamage(dmg, mob, dsp.attackType.PHYSICAL, dsp.damageType.SLASHING)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
    MobStatusEffectMove(mob, target, dsp.effect.SLEEP_I, 1, 0, math.random(30, 60))
    return dmg
 end

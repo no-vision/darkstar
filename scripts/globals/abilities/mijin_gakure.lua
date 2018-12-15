@@ -21,7 +21,12 @@ function onUseAbility(player,target,ability)
 
     dmg = dmg * resist
 
+<<<<<<< HEAD
     target:delHP(dmg)
+=======
+    dmg = utils.stoneskin(target, dmg)
+    target:takeDamage(dmg, player, dsp.attackType.SPECIAL, dsp.damageType.NONE)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
 
     player:setLocalVar("MijinGakure", 1)
     player:setHP(0)

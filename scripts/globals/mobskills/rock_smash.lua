@@ -33,13 +33,17 @@ function onMobWeaponSkill(target, mob, skill)
     local accmod = 2
     local dmgmod = 3
     local info = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,MOBSKILL_PHYSICAL,MOBPARAM_BLUNT,info.hitslanded)
+    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,dsp.attackType.PHYSICAL,dsp.damageType.BLUNT,info.hitslanded)
 
     local typeEffect = dsp.effect.PETRIFICATION
     local power = math.random(25, 40) + mob:getMainLvl()/3
 
     MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, power)
 
+<<<<<<< HEAD
     target:delHP(dmg)
+=======
+    target:takeDamage(dmg, mob, dsp.attackType.PHYSICAL, dsp.damageType.BLUNT)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     return dmg
 end

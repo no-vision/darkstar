@@ -18,9 +18,13 @@ function onPetAbility(target, pet, skill)
     local dmgmodsubsequent = 1
     local totaldamage = 0
     local damage = AvatarPhysicalMove(pet,target,skill,numhits,accmod,dmgmod,dmgmodsubsequent,TP_NO_EFFECT,1,2,3)
-    totaldamage = AvatarFinalAdjustments(damage.dmg,pet,skill,target,MOBSKILL_PHYSICAL,MOBPARAM_SLASH,numhits)
+    totaldamage = AvatarFinalAdjustments(damage.dmg,pet,skill,target,dsp.attackType.PHYSICAL,dsp.damageType.BLUNT,numhits)
     target:addStatusEffect(dsp.effect.STUN, 1, 0, 2)
+<<<<<<< HEAD
     target:delHP(totaldamage)
+=======
+    target:takeDamage(totaldamage, pet, dsp.attackType.PHYSICAL, dsp.damageType.BLUNT)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     target:updateEnmityFromDamage(pet,totaldamage)
     return totaldamage
 end

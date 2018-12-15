@@ -17,9 +17,13 @@ function onPetAbility(target, pet, skill)
     local damage = (5 * level +  10)
     damage = MobMagicalMove(pet,target,skill,damage,dsp.magic.ele.DARK,1,TP_NO_EFFECT,0)
     damage = mobAddBonuses(pet, nil, target, damage.dmg, dsp.magic.ele.DARK)
-    damage = AvatarFinalAdjustments(damage,pet,skill,target,MOBSKILL_MAGICAL,MOBPARAM_NONE,1)
+    damage = AvatarFinalAdjustments(damage,pet,skill,target,dsp.attackType.MAGICAL,dsp.damageType.DARK,1)
 
+<<<<<<< HEAD
     target:delHP(damage)
+=======
+    target:takeDamage(damage, pet, dsp.attackType.MAGICAL, dsp.damageType.DARK)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     target:updateEnmityFromDamage(pet,damage)
 
     return damage

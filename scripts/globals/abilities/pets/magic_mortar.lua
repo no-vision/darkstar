@@ -38,6 +38,10 @@ function onPetAbility(target, automaton, skill, master, action)
        automaton:addTP(80)
     end
 
+<<<<<<< HEAD
     target:delHP(damage)
+=======
+    target:takeDamage(damage, pet, dsp.attackType.MAGICAL, dsp.damageType.LIGHT)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     return damage
 end

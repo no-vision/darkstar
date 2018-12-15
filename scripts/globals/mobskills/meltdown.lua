@@ -20,8 +20,12 @@ function onMobWeaponSkill(target, mob, skill)
     local dmgmod = 1
 
     local info = MobMagicalMove(mob,target,skill,mob:getWeaponDmg()*math.random(10,18),dsp.magic.ele.NONE,dmgmod,TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,MOBSKILL_MAGICAL,MOBPARAM_NONE,MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,dsp.attackType.MAGICAL,dsp.damageType.NONE,MOBPARAM_IGNORE_SHADOWS)
     mob:setHP(0)
+<<<<<<< HEAD
     target:delHP(dmg)
+=======
+    target:takeDamage(dmg, mob, dsp.attackType.MAGICAL, dsp.damageType.NONE)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     return dmg
 end

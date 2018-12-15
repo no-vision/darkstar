@@ -56,6 +56,10 @@ function onMobWeaponSkill(target, mob, skill)
         target:updateEnmityFromDamage(mob,dmg)
     end
 
+<<<<<<< HEAD
     target:delHP(dmg)
+=======
+    target:takeDamage(dmg, mob, dsp.attackType.BREATH, dsp.damageType.NONE)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     return dmg
 end

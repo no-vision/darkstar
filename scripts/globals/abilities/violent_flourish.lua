@@ -87,8 +87,12 @@ function onUseAbility(player,target,ability,action)
         end
 
         dmg = utils.stoneskin(target, dmg)
+<<<<<<< HEAD
 
         target:delHP(dmg)
+=======
+        target:takeDamage(dmg, player, dsp.attackType.PHYSICAL, player:getWeaponDamageType(0))
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
         target:updateEnmityFromDamage(player,dmg)
 
         action:animation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(dsp.slot.MAIN)))

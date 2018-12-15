@@ -18,9 +18,13 @@ function onMobWeaponSkill(target, mob, skill)
 
     local totaldamage = 0
     local damage = MobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,0,TP_NO_EFFECT,1,2,3)
-    totaldamage = MobFinalAdjustments(damage.dmg,mob,skill,target,MOBSKILL_PHYSICAL,MOBPARAM_BLUNT,numhits)
+    totaldamage = MobFinalAdjustments(damage.dmg,mob,skill,target,dsp.attackType.PHYSICAL,dsp.damageType.BLUNT,numhits)
     target:addStatusEffect(dsp.effect.BLINDNESS, 20, 0, 30)
+<<<<<<< HEAD
     target:delHP(totaldamage)
+=======
+    target:takeDamage(totaldamage, mob, dsp.attackType.PHYSICAL, dsp.damageType.BLUNT)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
 
     return totaldamage
 

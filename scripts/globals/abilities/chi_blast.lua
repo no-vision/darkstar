@@ -23,8 +23,12 @@ function onUseAbility(player,target,ability)
     local dmg = math.floor(player:getStat(dsp.mod.MND)*(0.5+(math.random()/2))) * multiplier
 
     dmg = utils.stoneskin(target, dmg)
+<<<<<<< HEAD
     
     target:delHP(dmg)
+=======
+    target:takeDamage(dmg, player, dsp.attackType.SPECIAL, dsp.damageType.NONE)
+>>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
     
     target:updateClaim(player)
     target:updateEnmityFromDamage(player,dmg)
