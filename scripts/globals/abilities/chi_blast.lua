@@ -24,11 +24,15 @@ function onUseAbility(player,target,ability)
 
     dmg = utils.stoneskin(target, dmg)
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     target:delHP(dmg)
 =======
     target:takeDamage(dmg, player, dsp.attackType.SPECIAL, dsp.damageType.NONE)
 >>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
+=======
+    target:takeDamage(dmg, player, dsp.attackType.SPECIAL, dsp.damageType.ELEMENTAL)
+>>>>>>> Missed a file in the last commit
     
     target:updateClaim(player)
     target:updateEnmityFromDamage(player,dmg)
