@@ -21,10 +21,14 @@ function onPetAbility(target, pet, skill)
     totaldamage = AvatarFinalAdjustments(damage.dmg,pet,skill,target,dsp.attackType.PHYSICAL,dsp.damageType.BLUNT,numhits)
     target:addStatusEffect(dsp.effect.BLINDNESS, 20, 0, 30)
 <<<<<<< HEAD
+<<<<<<< HEAD
     target:delHP(totaldamage)
 =======
     target:takeDamage(totaldamage, petdsp.attackType.PHYSICAL, dsp.damageType.BLUNT)
 >>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
+=======
+    target:takeDamage(totaldamage, pet, dsp.attackType.PHYSICAL, dsp.damageType.BLUNT)
+>>>>>>> Addressing some typos and PR comments
     target:updateEnmityFromDamage(pet,totaldamage)
 
     return totaldamage

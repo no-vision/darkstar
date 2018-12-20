@@ -36,10 +36,14 @@ function onMobWeaponSkill(target, mob, skill)
     end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     target:delHP(realDmg)
 =======
     target:takeDamage(realDmg, mob, dsp.attackType.MAGICAL, dsp.damageType.NONE)
 >>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
+=======
+    target:takeDamage(realDmg, mob, dsp.attackType.MAGICAL, dsp.damageType.ELEMENTAL)
+>>>>>>> Addressing some typos and PR comments
 
     return realDmg
 

@@ -25,13 +25,18 @@ end
 function onMobWeaponSkill(target, mob, skill)
     local dmgmod = 1
 
+    -- TODO: The damage type should be based off of the Ghrah's element
     local info = MobMagicalMove(mob,target,skill,mob:getWeaponDmg()*math.random(7,15),dsp.magic.ele.NONE,dmgmod,TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,dsp.attackType.MAGICAL,dsp.damageType.NONE,MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,dsp.attackType.MAGICAL,dsp.damageType.ELEMENTAL,MOBPARAM_IGNORE_SHADOWS)
     mob:setHP(0)
+<<<<<<< HEAD
 <<<<<<< HEAD
     target:delHP(dmg)
 =======
     target:takeDamage(dmg, mob, dsp.attackType.MAGICAL, dsp.damageType.NONE)
 >>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
+=======
+    target:takeDamage(dmg, mob, dsp.attackType.MAGICAL, dsp.damageType.ELEMENTAL)
+>>>>>>> Addressing some typos and PR comments
     return dmg
 end

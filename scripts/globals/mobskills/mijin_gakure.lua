@@ -34,7 +34,7 @@ function onMobWeaponSkill(target, mob, skill)
     local baseDmg = mob:getWeaponDmg() * power
 
     local info = MobMagicalMove(mob,target,skill,baseDmg,dsp.magic.ele.NONE,dmgmod,TP_MAB_BONUS,1)
-    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,dsp.attackType.MAGICAL,dsp.damageType.NONE,MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(info.dmg,mob,skill,target,dsp.attackType.MAGICAL,dsp.damageType.ELEMENTAL,MOBPARAM_IGNORE_SHADOWS)
 
     if (mob:isInDynamis()) then
         -- dynamis mobs will kill themselves
@@ -43,9 +43,13 @@ function onMobWeaponSkill(target, mob, skill)
     end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     target:delHP(dmg)
 =======
     target:takeDamage(dmg, mob, dsp.attackType.MAGICAL, dsp.damageType.NONE)
 >>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
+=======
+    target:takeDamage(dmg, mob, dsp.attackType.MAGICAL, dsp.damageType.ELEMENTAL)
+>>>>>>> Addressing some typos and PR comments
     return dmg
 end
