@@ -53,7 +53,7 @@ function onUseAbility(player,target,ability,action)
     --apply WSC
     local weaponDamage = player:getWeaponDmg()
 
-    if (player:getWeaponSkillType(0) == 1) then
+    if (player:getWeaponSkillType(dsp.slot.MAIN) == 1) then
         local h2hSkill = ((player:getSkillLevel(1) * 0.11) + 3)
         weaponDamage = player:getWeaponDmg()-3
 
@@ -88,11 +88,15 @@ function onUseAbility(player,target,ability,action)
 
         dmg = utils.stoneskin(target, dmg)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         target:delHP(dmg)
 =======
         target:takeDamage(dmg, player, dsp.attackType.PHYSICAL, player:getWeaponDamageType(0))
 >>>>>>> AttackType and DamageType are now provided to `CBattleEntity::takeDamage()` to enable tracking damage by types
+=======
+        target:takeDamage(dmg, player, dsp.attackType.PHYSICAL, player:getWeaponDamageType(dsp.slot.MAIN))
+>>>>>>> Use `dsp.slot.MAIN` when using `getWeaponDamageType` and `getWeaponSkillType`
         target:updateEnmityFromDamage(player,dmg)
 
         action:animation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(dsp.slot.MAIN)))
