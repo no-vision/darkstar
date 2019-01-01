@@ -1512,7 +1512,9 @@ namespace charutils
 
         if ((PItem != nullptr) && PItem->isType(ITEM_ARMOR))
         {
+            printf("UnequipItem(): Item is of type Armor\n");
             auto removeSlotID = ((CItemArmor*)PItem)->getRemoveSlotId();
+            printf("UnequipItem(): removeSlotID is (%d) - adjusted slot Id (%d)\n", removeSlotID, (removeSlotID & (1 << i)));
 
             for (auto i = 0u; i < sizeof(removeSlotID) * 8; ++i)
             {
@@ -1725,7 +1727,9 @@ namespace charutils
             }
         }
 
+        printf("EquipArmor(): Blanket unequip started: UnequipItem(PChar, equipSlotID, false);");
         UnequipItem(PChar, equipSlotID, false);
+        printf("EquipArmor(): Blanket unequip finished: UnequipItem(PChar, equipSlotID, false);");
 
         if (PItem->getEquipSlotId() & (1 << equipSlotID))
         {
@@ -2133,6 +2137,7 @@ namespace charutils
                 {
                     if (PItem->getScriptType() & SCRIPT_EQUIP)
                     {
+                        printf("EquipItem(): Scripted Item detected, sending to luautils::OnItemCheck()\n");
                         luautils::OnItemCheck(PChar, PItem, ITEMCHECK::EQUIP, nullptr);
                         PChar->m_EquipFlag |= PItem->getScriptType();
                     }
