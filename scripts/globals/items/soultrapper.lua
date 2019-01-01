@@ -17,7 +17,10 @@ function onItemCheck(target)
         print("Soultrapper: distanceBonus: " .. distanceBonus)
         caster:setLocalVar("Soultrap-DistanceBonus", distanceBonus)
         -- Get states of target, Notorious?, Using ability or spell?
-        local notoriousBonus = target:isMobType(MOBTYPE_NOTORIOUS)
+        local notoriousBonus = 0
+        if target:isMobType(MOBTYPE_NOTORIOUS) then
+            notoriousBonus = 1
+        end
         print("Soultrapper: notoriousBonus: " .. notoriousBonus)
         caster:setLocalVar("Soultrap-NotoriousBonus", notoriousBonus)
         -- Get target mob family attribute pool
