@@ -24,7 +24,7 @@ function onItemCheck(target)
         print("Soultrapper: notoriousBonus: " .. notoriousBonus)
         caster:setLocalVar("Soultrap-NotoriousBonus", notoriousBonus)
         -- Get target mob family attribute pool
-        target:setLocalVar("Soultrap-User", caster:getName())
+        target:setLocalVar("Soultrap-User", caster:getID())
         return 0
     end
     print("Soultrapper: An invalid soulplate itemId was found in the ammo slot: " .. soulplate:getItemID() .. ", Not ok to use.")
@@ -34,7 +34,8 @@ end
 function onItemUse(target, item)
     print("Soultrapper onItemUse(): Soultrapper is being used.")
     local caster = target:getLocalVar("Soultrap-User")
-    print("Soultrapper onItemUse(): Target: " .. target:getID() .. " | caster: " .. caster)
+    print("Soultrapper onItemUse(): Caster: " .. caster)
+    print("Soultrapper onItemUse(): Target: " .. target:getID())
     if caster ~= nil then
         -- Get bonuses and attribute pool
         -- Encode soul plate with Attribute, FP, and Mob Name
