@@ -2083,8 +2083,10 @@ namespace charutils
 
     void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
     {
+        printf("EquipItem(): entered function.");
         CItemArmor* PItem = (CItemArmor*)PChar->getStorage(containerID)->GetItem(slotID);
 
+        printf("EquipItem(): PItem set from containerID (%d) and slotID (%d).", containerID, equipSlotID);
         if (PItem && PItem == PChar->getEquip((SLOTTYPE)equipSlotID))
             return;
 
@@ -2114,7 +2116,7 @@ namespace charutils
 
             if ((PItem != nullptr) && PItem->isType(ITEM_ARMOR))
             {
-
+                printf("EquipItem(): PItem is not null and is of ITEM_ARMOR.");
                 if (!PItem->isSubType(ITEM_LOCKED) && EquipArmor(PChar, slotID, equipSlotID, containerID))
                 {
                     if (PItem->getScriptType() & SCRIPT_EQUIP)
@@ -2128,7 +2130,7 @@ namespace charutils
                         PChar->PRecastContainer->Add(RECAST_ITEM, slotID << 8 | containerID, PItem->getReuseTime() / 1000); // add recast timer to Recast List from any bag
 
                         // не забываем обновить таймер при экипировке предмета
-
+                        printf("EquipItem(): Item is usable and has charges.  Starting recast.");
                         PChar->pushPacket(new CInventoryItemPacket(PItem, containerID, slotID));
                         PChar->pushPacket(new CInventoryFinishPacket());
                     }
