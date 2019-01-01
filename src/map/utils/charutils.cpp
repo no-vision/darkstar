@@ -1507,6 +1507,7 @@ namespace charutils
 
     void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, bool update)
     {
+        printf("UnequipItem(): Operation started.\n");
         CItem* PItem = PChar->getEquip((SLOTTYPE)equipSlotID);
 
         if ((PItem != nullptr) && PItem->isType(ITEM_ARMOR))
@@ -1544,6 +1545,7 @@ namespace charutils
             // Call the LUA event before actually "unequipping" the item so the script can do stuff with it first
             if (((CItemArmor*)PItem)->getScriptType() & SCRIPT_EQUIP)
             {
+                printf("UnequipItem(): Transferring to luautils::OnItemCheck().\n");
                 luautils::OnItemCheck(PChar, PItem, ITEMCHECK::UNEQUIP, nullptr);
             }
 
@@ -1562,12 +1564,14 @@ namespace charutils
                     if ((PItem != nullptr) && PItem->isType(ITEM_ARMOR))
                     {
                         PChar->m_EquipFlag |= ((CItemArmor*)PItem)->getScriptType();
+                        printf("UnequipItem(): PChar->m_EquipFlag set to (%u).\n", PChar->m_EquipFlag);
                     }
                 }
             }
 
             if (PItem->isSubType(ITEM_CHARGED))
             {
+                printf("UnequipItem(): Removing charged item from recast list.\n");
                 PChar->PRecastContainer->Del(RECAST_ITEM, PItem->getSlotID() << 8 | PItem->getLocationID()); // Also remove item from the Recast List no matter what bag its in
             }
             PItem->setSubType(ITEM_UNLOCKED);
@@ -1605,20 +1609,26 @@ namespace charutils
                 break;
                 case SLOT_AMMO:
                 {
+                    printf("UnequipItem(): SLOT_AMMO detected in equipSlotID.\n");
                     if (PChar->equip[SLOT_RANGED] == 0)
                     {
+                        printf("UnequipItem(): PChar->equip[SLOT_RANGED] == 0, updating look to 0.\n");
                         PChar->look.ranged = 0;
                     }
+                    printf("UnequipItem(): SLOT_AMMO released to nullptr, update weaponstyle.\n");
                     PChar->m_Weapons[SLOT_AMMO] = nullptr;
                     UpdateWeaponStyle(PChar, equipSlotID, nullptr);
                 }
                 break;
                 case SLOT_RANGED:
                 {
+                    printf("UnequipItem(): SLOT_RANGED detect in equipSlotID.\n");
                     if (PChar->equip[SLOT_RANGED] == 0)
                     {
+                        printf("UnequipItem(): PChar->equip[SLOT_RANGED] == 0, updating look to 0.\n");
                         PChar->look.ranged = 0;
                     }
+                    printf("UnequipItem(): SLOT_RANGED released to nullptr, update weaponstyle.\n");
                     PChar->m_Weapons[SLOT_RANGED] = nullptr;
                     PChar->health.tp = 0;
                     PChar->StatusEffectContainer->DelStatusEffect(EFFECT_AFTERMATH);
@@ -1658,6 +1668,7 @@ namespace charutils
 
             if (update)
             {
+                printf("UnequipItem(): Updating final look and skill tables.\n");
                 charutils::BuildingCharSkillsTable(PChar);
                 PChar->UpdateHealth();
                 PChar->m_EquipSwap = true;
