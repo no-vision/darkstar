@@ -1734,6 +1734,7 @@ namespace charutils
 
         if (PItem->getEquipSlotId() & (1 << equipSlotID))
         {
+            printf("EquipArmor(): EquipSlotID (%d) with AND adjustment (%d)\n", PItem->getEquipSlotId(), (PItem->getEquipSlotId() & (1 << equipSlotID)));
             auto removeSlotID = PItem->getRemoveSlotId();
             printf("EquipArmor(): removeSlotID is (%d)\n", removeSlotID);
 
@@ -1741,7 +1742,7 @@ namespace charutils
             {
                 if (removeSlotID & (1 << i))
                 {
-                    printf("EquipArmor(): adjusted stot id is (%d)\n", (removeSlotID & (1 << i)));
+                    printf("EquipArmor(): adjusted slot id is (%d)\n", (removeSlotID & (1 << i)));
                     UnequipItem(PChar, i, false);
                     if (i >= SLOT_HEAD && i <= SLOT_FEET)
                     {
