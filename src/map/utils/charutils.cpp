@@ -1741,7 +1741,7 @@ namespace charutils
             {
                 if (removeSlotID & (1 << i))
                 {
-                    printf("EquipArmor(): adjusted stot id is (%d)\n", (removeSlotID & (1 << i));
+                    printf("EquipArmor(): adjusted stot id is (%d)\n", (removeSlotID & (1 << i)));
                     UnequipItem(PChar, i, false);
                     if (i >= SLOT_HEAD && i <= SLOT_FEET)
                     {
