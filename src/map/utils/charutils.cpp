@@ -1869,33 +1869,43 @@ namespace charutils
                 break;
                 case SLOT_RANGED:
                 {
+                    printf("EquipArmor(): Ranged slot detected.");
                     if (PItem->isType(ITEM_WEAPON))
                     {
+                        printf("EquipArmor(): Ranged item of type weapon detected.");
                         CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
                         {
+                            printf("EquipArmor(): non-Null item found in ammo slot, gathering skill information.");
                             if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
                                 ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
+                                printf("EquipArmor(): Ammo slot item does not match ranged slot skill types, unequip ammo.");
                                 UnequipItem(PChar, SLOT_AMMO, false);
                             }
                         }
+                        printf("EquipArmor(): Equip ranged item in slot.")
                         PChar->m_Weapons[SLOT_RANGED] = (CItemWeapon*)PItem;
                     }
+                    printf("EquipArmor(): Updating look and weaponstyle.");
                     PChar->look.ranged = PItem->getModelId();
                     UpdateWeaponStyle(PChar, equipSlotID, (CItemWeapon*)PItem);
                 }
                 break;
                 case SLOT_AMMO:
                 {
+                    printf("EquipArmor(): Ammo slot detected.");
                     if (PItem->isType(ITEM_WEAPON))
                     {
+                        printf("EquipArmor(): Ammo item of type weapon detected.");
                         CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
                         {
+                            printf("EquipArmor(): non-Null item found in ranged slot, gathering skill information.");
                             if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
                                 ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
+                                printf("EquipArmor(): Ranged slot item does not match ammo slot skill types, unequip ranged.");
                                 UnequipItem(PChar, SLOT_RANGED, false);
                             }
                         }
@@ -1903,7 +1913,9 @@ namespace charutils
                         {
                             PChar->look.ranged = PItem->getModelId();
                         }
+                        printf("EquipArmor(): Equip ammo item in slot.");
                         PChar->m_Weapons[SLOT_AMMO] = (CItemWeapon*)PItem;
+                        printf("EquipArmor(): Updating weaponstyle.");
                         UpdateWeaponStyle(PChar, equipSlotID, (CItemWeapon*)PItem);
                     }
                 }
