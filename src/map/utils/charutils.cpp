@@ -1869,53 +1869,54 @@ namespace charutils
                 break;
                 case SLOT_RANGED:
                 {
-                    printf("EquipArmor(): Ranged slot detected.");
+                    printf("EquipArmor(): Ranged slot detected.\n");
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        printf("EquipArmor(): Ranged item of type weapon detected.");
+                        printf("EquipArmor(): Ranged item of type weapon detected.\n");
                         CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
                         {
-                            printf("EquipArmor(): non-Null item found in ammo slot, gathering skill information.");
+                            printf("EquipArmor(): non-Null item found in ammo slot, gathering skill information.\n");
                             if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
                                 ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
-                                printf("EquipArmor(): Ammo slot item does not match ranged slot skill types, unequip ammo.");
+                                printf("EquipArmor(): Ammo slot item does not match ranged slot skill types, unequip ammo.\n");
                                 UnequipItem(PChar, SLOT_AMMO, false);
                             }
                         }
-                        printf("EquipArmor(): Equip ranged item in slot.");
+                        printf("EquipArmor(): Equip ranged item in slot.\n");
                         PChar->m_Weapons[SLOT_RANGED] = (CItemWeapon*)PItem;
                     }
-                    printf("EquipArmor(): Updating look and weaponstyle.");
+                    printf("EquipArmor(): Updating look and weaponstyle.\n");
                     PChar->look.ranged = PItem->getModelId();
                     UpdateWeaponStyle(PChar, equipSlotID, (CItemWeapon*)PItem);
                 }
                 break;
                 case SLOT_AMMO:
                 {
-                    printf("EquipArmor(): Ammo slot detected.");
+                    printf("EquipArmor(): Ammo slot detected.\n");
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        printf("EquipArmor(): Ammo item of type weapon detected.");
+                        printf("EquipArmor(): Ammo item of type weapon detected.\n");
                         CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
                         {
-                            printf("EquipArmor(): non-Null item found in ranged slot, gathering skill information.");
+                            printf("EquipArmor(): non-Null item found in ranged slot, gathering skill information.\n");
                             if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
                                 ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
-                                printf("EquipArmor(): Ranged slot item does not match ammo slot skill types, unequip ranged.");
+                                printf("EquipArmor(): Ranged slot item does not match ammo slot skill types, unequip ranged.\n");
                                 UnequipItem(PChar, SLOT_RANGED, false);
                             }
                         }
                         if (PChar->equip[SLOT_RANGED] == 0)
                         {
+                            printf("EquipArmor(): Updating look because PChar->equip[SLOT_RANGED] == 0\n");
                             PChar->look.ranged = PItem->getModelId();
                         }
-                        printf("EquipArmor(): Equip ammo item in slot.");
+                        printf("EquipArmor(): Equip ammo item in slot.\n");
                         PChar->m_Weapons[SLOT_AMMO] = (CItemWeapon*)PItem;
-                        printf("EquipArmor(): Updating weaponstyle.");
+                        printf("EquipArmor(): Updating weaponstyle.\n");
                         UpdateWeaponStyle(PChar, equipSlotID, (CItemWeapon*)PItem);
                     }
                 }
@@ -2083,10 +2084,10 @@ namespace charutils
 
     void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
     {
-        printf("EquipItem(): entered function.");
+        printf("EquipItem(): entered function.\n");
         CItemArmor* PItem = (CItemArmor*)PChar->getStorage(containerID)->GetItem(slotID);
 
-        printf("EquipItem(): PItem set from containerID (%d) and slotID (%d).", containerID, equipSlotID);
+        printf("EquipItem(): PItem set from containerID (%d) and slotID (%d).\n", containerID, equipSlotID);
         if (PItem && PItem == PChar->getEquip((SLOTTYPE)equipSlotID))
             return;
 
@@ -2116,7 +2117,7 @@ namespace charutils
 
             if ((PItem != nullptr) && PItem->isType(ITEM_ARMOR))
             {
-                printf("EquipItem(): PItem is not null and is of ITEM_ARMOR.");
+                printf("EquipItem(): PItem is not null and is of ITEM_ARMOR.\n");
                 if (!PItem->isSubType(ITEM_LOCKED) && EquipArmor(PChar, slotID, equipSlotID, containerID))
                 {
                     if (PItem->getScriptType() & SCRIPT_EQUIP)
@@ -2130,7 +2131,7 @@ namespace charutils
                         PChar->PRecastContainer->Add(RECAST_ITEM, slotID << 8 | containerID, PItem->getReuseTime() / 1000); // add recast timer to Recast List from any bag
 
                         // не забываем обновить таймер при экипировке предмета
-                        printf("EquipItem(): Item is usable and has charges.  Starting recast.");
+                        printf("EquipItem(): Item is usable and has charges.  Starting recast.\n");
                         PChar->pushPacket(new CInventoryItemPacket(PItem, containerID, slotID));
                         PChar->pushPacket(new CInventoryFinishPacket());
                     }
