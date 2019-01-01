@@ -8,6 +8,7 @@ function onItemCheck(target)
     print("Soultrapper onItemCheck(): Soultrapper pre-use item check.")
     -- Do we have a blank soul plate in the ammo slot?
     local caster = target:getTarget()
+    print("Soultrapper: Caster based off target:getTarget(): " .. caster:getName())
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
     if soulplate:getItemID() == 18722 or soulplate:getItemID() == 18725 then
         print("Soultrapper: Soulplate itemID found in ammo slot: " .. soulplate:getItemID() .. ", Ok to use.")
