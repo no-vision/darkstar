@@ -1735,11 +1735,13 @@ namespace charutils
         if (PItem->getEquipSlotId() & (1 << equipSlotID))
         {
             auto removeSlotID = PItem->getRemoveSlotId();
+            printf("EquipArmor(): removeSlotID is (%d)\n", removeSlotID);
 
             for (auto i = 0u; i < sizeof(removeSlotID) * 8; ++i)
             {
                 if (removeSlotID & (1 << i))
                 {
+                    printf("EquipArmor(): adjusted stot id is (%d)\n", (removeSlotID & (1 << i));
                     UnequipItem(PChar, i, false);
                     if (i >= SLOT_HEAD && i <= SLOT_FEET)
                     {
@@ -1770,6 +1772,7 @@ namespace charutils
                 CItemArmor* armor = PChar->getEquip((SLOTTYPE)i);
                 if (armor && armor->isType(ITEM_ARMOR) && armor->getRemoveSlotId() & PItem->getEquipSlotId())
                 {
+                    printf("EquipArmor(): Armor exists and removeSlotId contains equipSlotID at (%d)\n", (SLOTTYPE)i);
                     UnequipItem(PChar, i, false);
                 }
             }
