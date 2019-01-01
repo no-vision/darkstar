@@ -1514,12 +1514,13 @@ namespace charutils
         {
             printf("UnequipItem(): Item is of type Armor\n");
             auto removeSlotID = ((CItemArmor*)PItem)->getRemoveSlotId();
-            printf("UnequipItem(): removeSlotID is (%d) - adjusted slot Id (%d)\n", removeSlotID, (removeSlotID & (1 << i)));
+            printf("UnequipItem(): removeSlotID is (%d)\n", removeSlotID);
 
             for (auto i = 0u; i < sizeof(removeSlotID) * 8; ++i)
             {
                 if (removeSlotID & (1 << i))
                 {
+                    printf("UnequipItem(): adjusted slot Id (%d)\n",  (removeSlotID & (1 << i)));
                     if (i >= SLOT_HEAD && i <= SLOT_FEET)
                     {
                         switch (i)
