@@ -4,9 +4,10 @@
 -- Used to snap pictures of monsters
 -----------------------------------------
 
-function onItemCheck(target, item, param, caster)
+function onItemCheck(target)
     print("Soultrapper onItemCheck(): Soultrapper pre-use item check.")
     -- Do we have a blank soul plate in the ammo slot?
+    local caster = target:getTarget()
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
     if soulplate:getItemID() == 18722 or soulplate:getItemID() == 18725 then
         print("Soultrapper: Soulplate itemID found in ammo slot: " .. soulplate:getItemID() .. ", Ok to use.")
