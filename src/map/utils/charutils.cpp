@@ -1884,7 +1884,7 @@ namespace charutils
                                 UnequipItem(PChar, SLOT_AMMO, false);
                             }
                         }
-                        printf("EquipArmor(): Equip ranged item in slot.")
+                        printf("EquipArmor(): Equip ranged item in slot.");
                         PChar->m_Weapons[SLOT_RANGED] = (CItemWeapon*)PItem;
                     }
                     printf("EquipArmor(): Updating look and weaponstyle.");
