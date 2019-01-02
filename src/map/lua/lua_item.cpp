@@ -203,6 +203,11 @@ inline int32 CLuaItem::getAugment(lua_State* L)
     return 2;
 }
 
+inline int32 CLuaItem::getSoultrapInfo(lua_State* L)
+{
+    return 0;
+}
+
 inline int32 CLuaItem::getSkillType(lua_State* L)
 {
     DSP_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
@@ -302,6 +307,7 @@ Lunar<CLuaItem>::Register_t CLuaItem::methods[] =
     LUNAR_DECLARE_METHOD(CLuaItem,addMod),
     LUNAR_DECLARE_METHOD(CLuaItem,delMod),
     LUNAR_DECLARE_METHOD(CLuaItem,getAugment),
+    LUNAR_DELCARE_METHOD(CLuaItem,getSoultrapInfo),
     LUNAR_DECLARE_METHOD(CLuaItem,getSkillType),
     LUNAR_DECLARE_METHOD(CLuaItem,getWeaponskillPoints),
     LUNAR_DECLARE_METHOD(CLuaItem,isTwoHanded),

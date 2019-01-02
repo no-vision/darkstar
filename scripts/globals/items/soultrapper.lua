@@ -17,7 +17,7 @@ function onItemCheck(target)
     if soulplate == nil then
         return 1
     end
-    
+
     if soulplate:getID() == 18722 or soulplate:getID() == 18725 then
         print("Soultrapper: Soulplate itemID found in ammo slot: " .. soulplate:getID() .. ", Ok to use.")
         -- Are we facing the target?
@@ -52,6 +52,10 @@ function onItemUse(target, item)
     if caster ~= nil then
         -- Get bonuses and attribute pool
         -- Encode soul plate with Attribute, FP, and Mob Name
+        local attribute = 0
+        local fp = 0
+        local name = "blank"
+        --caster:addItem({id=2477, soultrap=attribute, fp, name})
     end
     print("Soultrapper onItemUse(): Soultrapper use complete.")
 end
