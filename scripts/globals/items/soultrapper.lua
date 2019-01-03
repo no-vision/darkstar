@@ -2,17 +2,15 @@
 -- ID: 18721
 -- Soultrapper
 -- Used to snap pictures of monsters
+-- Notes:
+-- 1. Soultrapper can be used outside of battle
+-- 2. Not facing the target will result in a failure to capture image
+-- 3. Distance, HP Level are very subjective
 -----------------------------------------
 
 function onItemCheck(target)
     print("Soultrapper onItemCheck(): Soultrapper pre-use item check.")
     -- Do we have a blank soul plate in the ammo slot?
-    local caster = target:getTarget()
-    if caster == nil then
-        return 1
-    end
-
-    print("Soultrapper: Caster based off target:getTarget(): " .. caster:getName())
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
     if soulplate == nil then
         return 1
@@ -25,16 +23,18 @@ function onItemCheck(target)
             -- Get distance of target from caster bonus
             local distanceBonus = (1 / caster:checkDistance(target))
             print("Soultrapper: distanceBonus: " .. distanceBonus)
-            caster:setLocalVar("Soultrap-DistanceBonus", distanceBonus)
             -- Get states of target, Notorious?, Using ability or spell?
             local notoriousBonus = 0
             if target:isMobType(MOBTYPE_NOTORIOUS) then
                 notoriousBonus = 1
             end
             print("Soultrapper: notoriousBonus: " .. notoriousBonus)
-            caster:setLocalVar("Soultrap-NotoriousBonus", notoriousBonus)
+            local mobHPBonus = 0
+            if target:getHPP() < 50 then
+                mobHPBonus = 1
+            end
+            print("Soultrapper: mobHPBonus: " .. mobHPBonus)
             -- Get target mob family attribute pool
-            target:setLocalVar("Soultrap-Caster", caster:getID())
         else
             print("Soultrapper: Caster is not facing the target")
         end
@@ -44,11 +44,27 @@ function onItemCheck(target)
     return 1
 end
 
-function onItemUse(target, item)
+function onItemUse(target)
     print("Soultrapper onItemUse(): Soultrapper is being used.")
     local caster = target:getLocalVar("Soultrap-Caster")
     print("Soultrapper onItemUse(): Caster: " .. caster)
     print("Soultrapper onItemUse(): Target: " .. target:getID())
+
+    -- Pack item extra data for storage,
+    local extra[0x18] = 0
+    --
+    print("Soultrapper packing mob name to extra data.")
+    local mobName = target:getName()
+    print("Soultrapper Name Pack: " .. mobName)
+    mobName = mobName:gsub("%s+", "") -- Remove whitespace
+    print("Soultrapper Name Pack Whitespace: " .. mobName)
+    if #mobName > 13 then
+        mobName = mobName:sub(mobName, 0, 12) -- Truncate
+        print("Soultrapper Name Pack Truncate: " .. mobName)
+    end
+
+    extra[0x00] = mobName
+    print("Soultrapper extra data Name Pack: " .. extra)
     if caster ~= nil then
         -- Get bonuses and attribute pool
         -- Encode soul plate with Attribute, FP, and Mob Name
