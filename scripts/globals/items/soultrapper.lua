@@ -23,17 +23,20 @@ function onItemCheck(target, unknown, caster)
     local soultrapper = caster:getStorageItem(0, 0, dsp.slot.RANGED)
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
     if soulplate == nil then
-        caster:messageBasic(MESSAGE_NOPLATE, 18721, 0, target)
+        print("Soultrapper: Sending no plate messaage.")
+        caster:messageBasic(text.MESSAGE_NOPLATE, 18721)
         return -1
     end
 
     if caster:hasStatusEffect(dsp.effect.INVISIBLE) or caster:hasStatusEffect(dsp.effect.SNEAK) then
-        caster:messageBasic(MESSAGE_SNKINVS, 18721, 0, target)
+        print("Soultrapper: Sending player is sneaked or invisible message.")
+        caster:messageBasic(text.MESSAGE_SNKINVS, 18721)
         return -1
     end
 
     if target:isNPC() then
-        caster:messageBasic(MESSAGE_CANNOT_USE, 0, 0, target)
+        print("Soultrapper: Sending target is an npc message.")
+        caster:messageBasic(text.MESSAGE_CANNOT_USE, 0, 0, target)
         return -1
     end
 
@@ -81,7 +84,7 @@ function onItemUse(target)
         print("Soultrapper Name Pack Truncate: " .. mobName)
     end
 
-    target:messageSpecial(MESSAGE_SUCCESS, 0, 2477)
+    target:messageSpecial(text.MESSAGE_SUCCESS, 0, 2477)
     print("Soultrapper onItemUse(): Soultrapper use complete.")
 
 end
