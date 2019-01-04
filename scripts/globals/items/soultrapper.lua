@@ -55,6 +55,7 @@ function onItemUse(target)
     print("Soultrapper Name Pack: " .. mobName)
     mobName = mobName:gsub("%s+", "") -- Remove whitespace
     print("Soultrapper Name Pack Whitespace: " .. mobName)
+    -- Remove punctuation
     if #mobName > 13 then
         mobName = mobName:sub(mobName, 0, 12) -- Truncate
         print("Soultrapper Name Pack Truncate: " .. mobName)
@@ -63,4 +64,5 @@ function onItemUse(target)
     extra[0x00] = mobName
     print("Soultrapper extra data Name Pack: " .. extra)
     print("Soultrapper onItemUse(): Soultrapper use complete.")
+
 end
