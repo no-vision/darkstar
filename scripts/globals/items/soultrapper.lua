@@ -20,6 +20,7 @@ function onItemCheck(target, unknown, caster)
     local soultrapper = caster:getStorageItem(0, 0, dsp.slot.RANGED)
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
     if soulplate == nil then
+        caster:messageSpecial(MESSAGE_NOPLATE, soultrapper:getID())
         return 1
     end
 
@@ -47,7 +48,6 @@ function onItemCheck(target, unknown, caster)
         end
         return 0
     end
-    caster:messageSpecial(MESSAGE_NOPLATE, soultrapper:getID())
     print("Soultrapper: An invalid soulplate itemId was found in the ammo slot: " .. soulplate:getItemID() .. ", Not ok to use.")
     return 1
 end
