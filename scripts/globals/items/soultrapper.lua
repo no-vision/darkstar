@@ -49,7 +49,7 @@ function onItemCheck(target, unknown, caster)
     return 1
 end
 
-function onItemUse(target, caster)
+function onItemUse(target, unknown, caster)
     print("Soultrapper onItemUse(): Soultrapper is being used.")
 
     -- Pack item extra data for storage,
