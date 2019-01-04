@@ -14,7 +14,7 @@ text =
     MESSAGE_SUCCESS = 515,      -- <player> successfully recorded the target's image onto <itemId>.
     MESSAGE_FAILURE = 516,      -- <player> was unable to capture the target's image.
     MESSAGE_CANNOT_USE = 517,   -- The <itemId> cannot be used on that target.
-    MESSAGE_SNKINVS = 518       -- The <itemId> cannot be used under the effect of Invisible or Sneak.
+    MESSAGE_SNEAK_INVIS = 518       -- The <itemId> cannot be used under the effect of Invisible or Sneak.
 }
 
 function onItemCheck(target, unknown, caster)
@@ -22,20 +22,17 @@ function onItemCheck(target, unknown, caster)
     -- Do we have a blank soul plate in the ammo slot?
     local soultrapper = caster:getStorageItem(0, 0, dsp.slot.RANGED)
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
-    if soulplate == nil then
-        print("Soultrapper: Sending no plate messaage.")
-        caster:messageBasic(text.MESSAGE_NOPLATE, 18721)
+    if soulplate == nil or (not soulplate:getID() == 18722 or soulplate:getID() == 18725) then
+        caster:messageBasic(text.MESSAGE_NOPLATE, soultrapper:getID())
         return -1
     end
 
-    if caster:hasStatusEffect(dsp.effect.INVISIBLE) or caster:hasStatusEffect(dsp.effect.SNEAK) then
-        print("Soultrapper: Sending player is sneaked or invisible message.")
-        caster:messageBasic(text.MESSAGE_SNKINVS, 18721)
+    if caster:hasStatusEffect(dsp.effect.SNEAK) or caster:hasStatusEffect(dsp.effect.INVISIBLE) then
+        caster:messageBasic(text.MESSAGE_SNEAK_INVIS, soultrapper:getID())
         return -1
     end
 
     if target:isNPC() then
-        print("Soultrapper: Sending target is an npc message.")
         caster:messageBasic(text.MESSAGE_CANNOT_USE, 0, 0, target)
         return -1
     end
@@ -84,7 +81,7 @@ function onItemUse(target)
         print("Soultrapper Name Pack Truncate: " .. mobName)
     end
 
-    target:messageSpecial(text.MESSAGE_SUCCESS, 0, 2477)
+    target:messageBasic(text.MESSAGE_SUCCESS, 2477)
     print("Soultrapper onItemUse(): Soultrapper use complete.")
 
 end
