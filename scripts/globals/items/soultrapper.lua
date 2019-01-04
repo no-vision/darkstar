@@ -46,9 +46,6 @@ end
 
 function onItemUse(target)
     print("Soultrapper onItemUse(): Soultrapper is being used.")
-    local caster = target:getLocalVar("Soultrap-Caster")
-    print("Soultrapper onItemUse(): Caster: " .. caster)
-    print("Soultrapper onItemUse(): Target: " .. target:getID())
 
     -- Pack item extra data for storage,
     local extra[0x18] = 0
@@ -65,13 +62,5 @@ function onItemUse(target)
 
     extra[0x00] = mobName
     print("Soultrapper extra data Name Pack: " .. extra)
-    if caster ~= nil then
-        -- Get bonuses and attribute pool
-        -- Encode soul plate with Attribute, FP, and Mob Name
-        local attribute = 0
-        local fp = 0
-        local name = "blank"
-        --caster:addItem({id=2477, soultrap=attribute, fp, name})
-    end
     print("Soultrapper onItemUse(): Soultrapper use complete.")
 end
