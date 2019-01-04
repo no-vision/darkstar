@@ -23,17 +23,17 @@ function onItemCheck(target, unknown, caster)
     local soultrapper = caster:getStorageItem(0, 0, dsp.slot.RANGED)
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
     if soulplate == nil then
-        caster:messageBasic(MESSAGE_NOPLATE, 18721)
+        caster:messageBasic(MESSAGE_NOPLATE, 18721, 0, target)
         return -1
     end
 
     if caster:hasStatusEffect(dsp.effect.INVISIBLE) or caster:hasStatusEffect(dsp.effect.SNEAK) then
-        caster:messageBasic(MESSAGE_SNKINVS, 18721)
+        caster:messageBasic(MESSAGE_SNKINVS, 18721, 0, target)
         return -1
     end
 
     if target:isNPC() then
-        caster:messageBasic(MESSAGE_CANNOT_USE)
+        caster:messageBasic(MESSAGE_CANNOT_USE, 0, 0, target)
         return -1
     end
 
@@ -69,7 +69,6 @@ function onItemUse(target)
     print("Soultrapper onItemUse(): Soultrapper is being used.")
 
     -- Pack item extra data for storage,
-    print("Soultrapper: Field test caster: " .. caster)
     --
     print("Soultrapper packing mob name to extra data.")
     local mobName = target:getName()
