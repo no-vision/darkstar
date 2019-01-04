@@ -11,7 +11,10 @@
 text = 
 {
     MESSAGE_NOPLATE = 514,      -- You do not have the proper items equipped to use the <soultrapper>.
-    MESSAGE_SUCCESS = 515,      -- <player> successfully recorded the target's image onto <plateId>
+    MESSAGE_SUCCESS = 515,      -- <player> successfully recorded the target's image onto <itemId>.
+    MESSAGE_FAILURE = 516,      -- <player> was unable to capture the target's image.
+    MESSAGE_CANNOT_USE = 517,   -- The <itemId> cannot be used on that target.
+    MESSAGE_SNKINVS = 518       -- The <itemId> cannot be used under the effect of Invisible or Sneak.
 }
 
 function onItemCheck(target, unknown, caster)
@@ -20,7 +23,17 @@ function onItemCheck(target, unknown, caster)
     local soultrapper = caster:getStorageItem(0, 0, dsp.slot.RANGED)
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
     if soulplate == nil then
-        caster:messageBasic(MESSAGE_NOPLATE, 0, soultrapper:getID())
+        caster:messageBasic(MESSAGE_NOPLATE, 18721)
+        return -1
+    end
+
+    if caster:hasStatusEffect(dsp.effect.INVISIBLE) or caster:hasStatusEffect(dsp.effect.SNEAK) then
+        caster:messageBasic(MESSAGE_SNKINVS, 18721)
+        return -1
+    end
+
+    if target:isNPC() then
+        caster:messageBasic(MESSAGE_CANNOT_USE)
         return -1
     end
 
