@@ -307,7 +307,7 @@ Lunar<CLuaItem>::Register_t CLuaItem::methods[] =
     LUNAR_DECLARE_METHOD(CLuaItem,addMod),
     LUNAR_DECLARE_METHOD(CLuaItem,delMod),
     LUNAR_DECLARE_METHOD(CLuaItem,getAugment),
-    LUNAR_DELCARE_METHOD(CLuaItem,getSoultrapInfo),
+    LUNAR_DECLARE_METHOD(CLuaItem,getSoultrapInfo),
     LUNAR_DECLARE_METHOD(CLuaItem,getSkillType),
     LUNAR_DECLARE_METHOD(CLuaItem,getWeaponskillPoints),
     LUNAR_DECLARE_METHOD(CLuaItem,isTwoHanded),
