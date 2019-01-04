@@ -8,6 +8,11 @@
 -- 3. Distance, HP Level are very subjective
 -----------------------------------------
 
+text = 
+{
+    MESSAGE_SUCCESS = 515,      -- <player> successfully recorded the target's image onto <plateId>
+}
+
 function onItemCheck(target, unknown, caster)
     print("Soultrapper onItemCheck(): Soultrapper pre-use item check.")
     -- Do we have a blank soul plate in the ammo slot?
@@ -44,10 +49,11 @@ function onItemCheck(target, unknown, caster)
     return 1
 end
 
-function onItemUse(target)
+function onItemUse(target, caster)
     print("Soultrapper onItemUse(): Soultrapper is being used.")
 
     -- Pack item extra data for storage,
+    print("Soultrapper: Field test caster: " .. caster:getName())
     --
     print("Soultrapper packing mob name to extra data.")
     local mobName = target:getName()
@@ -60,6 +66,7 @@ function onItemUse(target)
         print("Soultrapper Name Pack Truncate: " .. mobName)
     end
 
+    caster:messageSpecial(MESSAGE_SUCCESS, 2477)
     print("Soultrapper onItemUse(): Soultrapper use complete.")
 
 end
