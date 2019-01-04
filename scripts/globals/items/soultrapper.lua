@@ -49,11 +49,11 @@ function onItemCheck(target, unknown, caster)
     return 1
 end
 
-function onItemUse(target, unknown, unknown, caster)
+function onItemUse(target, caster)
     print("Soultrapper onItemUse(): Soultrapper is being used.")
 
     -- Pack item extra data for storage,
-    print("Soultrapper: Field test caster: " .. caster:getName())
+    print("Soultrapper: Field test caster: " .. caster)
     --
     print("Soultrapper packing mob name to extra data.")
     local mobName = target:getName()
