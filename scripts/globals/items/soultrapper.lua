@@ -8,7 +8,7 @@
 -- 3. Distance, HP Level are very subjective
 -----------------------------------------
 
-function onItemCheck(target, item, caster)
+function onItemCheck(target, unknown, caster)
     print("Soultrapper onItemCheck(): Soultrapper pre-use item check.")
     -- Do we have a blank soul plate in the ammo slot?
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
@@ -52,7 +52,7 @@ function onItemUse(target)
     print("Soultrapper packing mob name to extra data.")
     local mobName = target:getName()
     print("Soultrapper Name Pack: " .. mobName)
-    mobName = mobName:gsub("%s+", "") -- Remove whitespace
+    mobName = mobName:gsub(mobName, "%s+", "_") -- Remove whitespace
     print("Soultrapper Name Pack Whitespace: " .. mobName)
     -- Remove punctuation
     if #mobName > 13 then
