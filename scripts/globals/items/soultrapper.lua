@@ -20,7 +20,7 @@ function onItemCheck(target, unknown, caster)
     local soultrapper = caster:getStorageItem(0, 0, dsp.slot.RANGED)
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
     if soulplate == nil then
-        caster:messageSpecial(MESSAGE_NOPLATE, soultrapper:getID())
+        caster:messageBasic(MESSAGE_NOPLATE, soultrapper:getID())
         return 1
     end
 
