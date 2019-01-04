@@ -52,11 +52,11 @@ function onItemUse(target)
     print("Soultrapper packing mob name to extra data.")
     local mobName = target:getName()
     print("Soultrapper Name Pack: " .. mobName)
-    mobName = mobName:gsub("%s+", "_") -- Remove whitespace
+    mobName = mobName:gsub("[".."_' ":gsub("%W", "%%%1").."]", '') -- Remove special characters
     print("Soultrapper Name Pack Underscore: " .. mobName)
     -- Remove punctuation
     if #mobName > 13 then
-        mobName = string.sub(mobName, 0, 12) -- Truncate
+        mobName = string.sub(mobName, 1, 13) -- Truncate
         print("Soultrapper Name Pack Truncate: " .. mobName)
     end
 
