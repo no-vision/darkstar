@@ -8,7 +8,7 @@
 -- 3. Distance, HP Level are very subjective
 -----------------------------------------
 
-function onItemCheck(target)
+function onItemCheck(target, caster)
     print("Soultrapper onItemCheck(): Soultrapper pre-use item check.")
     -- Do we have a blank soul plate in the ammo slot?
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
