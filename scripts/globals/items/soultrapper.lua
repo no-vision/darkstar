@@ -10,12 +10,14 @@
 
 text = 
 {
+    MESSAGE_NOPLATE = 514,      -- You do not have the proper items equipped to use the <soultrapper>.
     MESSAGE_SUCCESS = 515,      -- <player> successfully recorded the target's image onto <plateId>
 }
 
 function onItemCheck(target, unknown, caster)
     print("Soultrapper onItemCheck(): Soultrapper pre-use item check.")
     -- Do we have a blank soul plate in the ammo slot?
+    local soultrapper = caster:getStorageItem(0, 0, dsp.slot.RANGED)
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
     if soulplate == nil then
         return 1
@@ -45,11 +47,12 @@ function onItemCheck(target, unknown, caster)
         end
         return 0
     end
+    caster:messageSpecial(MESSAGE_NOPLATE, soultrapper:getID())
     print("Soultrapper: An invalid soulplate itemId was found in the ammo slot: " .. soulplate:getItemID() .. ", Not ok to use.")
     return 1
 end
 
-function onItemUse(target, caster)
+function onItemUse(target)
     print("Soultrapper onItemUse(): Soultrapper is being used.")
 
     -- Pack item extra data for storage,
@@ -66,7 +69,7 @@ function onItemUse(target, caster)
         print("Soultrapper Name Pack Truncate: " .. mobName)
     end
 
-    caster:messageSpecial(MESSAGE_SUCCESS, 2477)
+    target:messageSpecial(MESSAGE_SUCCESS, 2477)
     print("Soultrapper onItemUse(): Soultrapper use complete.")
 
 end
