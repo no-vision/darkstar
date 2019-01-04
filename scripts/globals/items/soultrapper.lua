@@ -69,7 +69,7 @@ function onItemUse(target)
         print("Soultrapper Name Pack Truncate: " .. mobName)
     end
 
-    target:messageSpecial(MESSAGE_SUCCESS, 2477)
+    target:messageSpecial(MESSAGE_SUCCESS, 0, 2477)
     print("Soultrapper onItemUse(): Soultrapper use complete.")
 
 end
