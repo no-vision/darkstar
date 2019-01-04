@@ -48,7 +48,6 @@ function onItemUse(target)
     print("Soultrapper onItemUse(): Soultrapper is being used.")
 
     -- Pack item extra data for storage,
-    local extra[0x18] = 0
     --
     print("Soultrapper packing mob name to extra data.")
     local mobName = target:getName()
@@ -61,7 +60,6 @@ function onItemUse(target)
         print("Soultrapper Name Pack Truncate: " .. mobName)
     end
 
-    extra[0x00] = mobName
     print("Soultrapper extra data Name Pack: " .. extra)
     print("Soultrapper onItemUse(): Soultrapper use complete.")
 
