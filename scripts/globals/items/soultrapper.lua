@@ -21,7 +21,7 @@ function onItemCheck(target, unknown, caster)
     local soulplate = caster:getStorageItem(0, 0, dsp.slot.AMMO)
     if soulplate == nil then
         caster:messageBasic(MESSAGE_NOPLATE, soultrapper:getID())
-        return 1
+        return -1
     end
 
     if soulplate:getID() == 18722 or soulplate:getID() == 18725 then
