@@ -60,7 +60,6 @@ function onItemUse(target)
         print("Soultrapper Name Pack Truncate: " .. mobName)
     end
 
-    print("Soultrapper extra data Name Pack: " .. extra)
     print("Soultrapper onItemUse(): Soultrapper use complete.")
 
 end
