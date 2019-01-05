@@ -125,6 +125,9 @@ public:
     virtual const int8* getSignature();
     virtual void setSignature(int8* signature);
 
+    const int8* getSoulplateMobName();
+    void        setSoulplateMobName(int8* name);
+
     uint8       m_extra[0x18];  // any extra data pertaining to item (augments, furniture location, etc)
 
 protected:

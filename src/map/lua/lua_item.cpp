@@ -208,6 +208,11 @@ inline int32 CLuaItem::getSoulplateData(lua_State* L)
     return 0;
 }
 
+inline int32 CLuaItem::setSoulplateData(lua_State* L)
+{
+    return 0;
+}
+
 inline int32 CLuaItem::getSkillType(lua_State* L)
 {
     DSP_DEBUG_BREAK_IF(m_PLuaItem == nullptr);

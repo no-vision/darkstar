@@ -69,7 +69,8 @@ public:
     int32 getAugment(lua_State*);           // get the augment id and power in slot
     //int32 setAugment(lua_State*);           // set the augment id and power in slot
 
-    int32 getSoulplateData(lua_State*);     // Soulplate information
+    int32 getSoulplateData(lua_State*);     // get Soulplate data
+    int32 setSoulplateData(lua_State*);     // set Soulplate data
 
     int32 getSkillType(lua_State*);         // get skill type
     int32 getWeaponskillPoints(lua_State*); // get current ws points
