@@ -5,7 +5,7 @@
 -----------------------------------
 
 package.loaded["scripts/zones/Alzadaal_Undersea_Ruins/TextIDs"] = nil
-require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
@@ -24,19 +24,19 @@ end;
 function onTrigger(player,npc)
     printf("AzaldaalUR: Zhayolm Remnants _20v.lua onTrigger()")
     printf(". Player triggering: " .. player:getName())
-    if player:hasKeyItem(REMNANTS_PERMIT) then
+    if player:hasKeyItem(dsp.ki.REMNANTS_PERMIT) then
 	    local mask = -2
         if player:getMainLvl() >= 65 then
             mask = -6
         end
 	if player:checkImbuedItems() then
 	    printf(".. Player: " .. player:getName() .. " has imbued items.")
-	    player:messageText(player,MEMBER_IMBUED_ITEM, false)
+	    player:messageText(player,ID.text.MEMBER_IMBUED_ITEM, false)
 	    return
 	end
         player:startEvent(407, 0, mask, 0, 0, 7)
     else
-        player:messageSpecial(NOTHING_HAPPENS)
+        player:messageSpecial(ID.text.NOTHING_HAPPENS)
     end
 end;
 
@@ -58,17 +58,17 @@ function onEventUpdate(player,csid,option,target)
             if v:getZone() == player:getZone() then
                 if v:checkdistance(player) > 50 then
                     printf(".. Member too far but in zone. Member: " .. v:getName())
-                    player:messageText(target,MEMBER_TOO_FAR, false)
+                    player:messageText(target,ID.text.MEMBER_TOO_FAR, false)
                     player:instanceEntry(target, 1)
                     return
-                elseif not v:hasKeyItem(REMNANTS_PERMIT) or (v:getMainLvl() < 65) then
+                elseif not v:hasKeyItem(dsp.ki.REMNANTS_PERMIT) or (v:getMainLvl() < 65) then
                     printf(".. Member has no permit or lower than Lv65. Member: " .. v:getName())
-                    player:messageText(target,MEMBER_NO_REQS, false)
+                    player:messageText(target,ID.text.MEMBER_NO_REQS, false)
                     player:instanceEntry(target, 1)
                     return;
         		elseif v:checkImbuedItems() then
         		    printf(".. Member has imbued items. Member: " .. v:getName())
-        		    player:messageText(target,MEMBER_IMBUED_ITEM, false)
+        		    player:messageText(target,ID.text.MEMBER_IMBUED_ITEM, false)
         		    player:instanceEntry(target, 1)
         		    return;
                 end
@@ -116,7 +116,7 @@ function onInstanceCreated(player,target,instance)
 
         player:setInstance(instance)
         player:instanceEntry(target,4)
-        player:delKeyItem(REMNANTS_PERMIT)
+        player:delKeyItem(dsp.ki.REMNANTS_PERMIT)
 	    player:setVar("Salvage-DayEntered", entryDay)
         if alliance ~= nil then
             for _,v in ipairs(alliance) do
@@ -124,7 +124,7 @@ function onInstanceCreated(player,target,instance)
                 if v:getID() ~= player:getID() then
 --                    v:startEvent(0x73, 2)
                     v:setInstance(instance)
-                    v:delKeyItem(REMNANTS_PERMIT)
+                    v:delKeyItem(dsp.ki.REMNANTS_PERMIT)
                     v:setVar("Salvage-DayEntered", entryDay)
                     v:setVar("Salvage-InstanceId", 73)
 		            v:setPos(0, 0, 0, 0, 73)
@@ -133,7 +133,7 @@ function onInstanceCreated(player,target,instance)
         end
     else
 	    printf(".. No instance cannot enter.")
-        player:messageText(target,CANNOT_ENTER, false)
+        player:messageText(target,ID.text.CANNOT_ENTER, false)
         player:instanceEntry(target, 3)
     end
 end;
