@@ -125,6 +125,8 @@ public:
     virtual const int8* getSignature();
     virtual void setSignature(int8* signature);
 
+    void        setAppraisalID(uint8* appID);
+
     const int8* getSoulplateMobName();
     void        setSoulplateMobName(int8* name);
 

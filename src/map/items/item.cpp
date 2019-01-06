@@ -303,9 +303,25 @@ void CItem::setSignature(int8* signature)
 
 /************************************************************************
 *                                                                       *
+*  Appraisal Origin IDs                                                 *
+*                                                                       *
+************************************************************************/
+
+void CItem::setAppraisalID(uint8* appID)
+{
+    memcpy(m_extra + 0x16, &appID, sizeof(m_extra) - 0x16);
+}
+
+/************************************************************************
+*                                                                       *
 * Soulplate mob name                                                    *
 *                                                                       *
 ************************************************************************/
+const int8* CItem::getSoulplateMobName()
+{
+    return 0;
+}
+
 void CItem::setSoulplateMobName(int8* name)
 {
     memcpy(m_extra + 0x00, name, sizeof(m_extra) - 0x00);

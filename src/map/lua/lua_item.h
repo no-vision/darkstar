@@ -69,6 +69,8 @@ public:
     int32 getAugment(lua_State*);           // get the augment id and power in slot
     //int32 setAugment(lua_State*);           // set the augment id and power in slot
 
+    int32 getAppraisalID(lua_State*);       // get the appraisal ID
+
     int32 getSoulplateData(lua_State*);     // get Soulplate data
     int32 setSoulplateData(lua_State*);     // set Soulplate data
 
